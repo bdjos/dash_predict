@@ -100,7 +100,7 @@ def update_graph_scatter():
                      end_date,
                      title,
                      db_obj,
-                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'line'})
+                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'})
                      #IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
                      #MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
                      #MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
@@ -117,7 +117,7 @@ def update_graph_scatter():
                      end_date,
                      title,
                      db_obj,
-                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'line'})
+                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'})
                      #IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
                      #MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
                      #MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
