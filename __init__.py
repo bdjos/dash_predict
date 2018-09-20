@@ -14,8 +14,7 @@ for PATH in PATHS:
     if PATH not in sys.path:
         sys.path.insert(0, PATH)
     
-import pandasdb
-import pandas as pd
+from dash_predict import pandasdb
 from datetime import datetime, timedelta
 
 def dash_data(start_date, end_date, title, db_obj, **tables):
@@ -95,7 +94,7 @@ def update_graph_scatter():
                      end_date,
                      title,
                      db_obj, 
-                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': ''}, 
+                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'}, 
                      IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'}, 
                      MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'})       
 
@@ -110,7 +109,7 @@ def update_graph_scatter():
                      end_date,
                      title,
                      db_obj, 
-                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': ''}, 
+                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'}, 
                      IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'}, 
                      MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'}) 
     
