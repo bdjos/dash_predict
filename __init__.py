@@ -80,10 +80,10 @@ app.layout = html.Div(style={'margin-top': 20}, children=[
             dcc.Graph(id='five-day', animate=True),
             dcc.Interval(
                     id='graph-update',
-                    interval=10*1000),
+                    interval=1*1000),
             dcc.Interval(
                     id='previous-update',
-                    interval=60*1000)
+                    interval=10*1000)
         ]
 )
 
@@ -100,10 +100,10 @@ def update_graph_scatter():
                      end_date,
                      title,
                      db_obj,
-                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'})
-                     #IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
-                     #MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
-                     #MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
+                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'},
+                     IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
+                     MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
+                     MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
 
 ## Graph 2: Past five days of data
 @app.callback(Output('five-day', 'figure'),
@@ -117,10 +117,10 @@ def update_graph_scatter():
                      end_date,
                      title,
                      db_obj,
-                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'})
-                     #IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
-                     #MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
-                     #MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
+                     IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'solid'},
+                     IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
+                     MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
+                     MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
 
 server = app.server
 
