@@ -80,7 +80,10 @@ app.layout = html.Div(style={'margin-top': 20}, children=[
             dcc.Graph(id='five-day', animate=True),
             dcc.Interval(
                     id='graph-update',
-                    interval=5*1000)
+                    interval=10*1000),
+            dcc.Interval(
+                    id='previous-update',
+                    interval=60*1000)
         ]
 )
 
@@ -104,7 +107,7 @@ def update_graph_scatter():
 
 ## Graph 2: Past five days of data
 @app.callback(Output('five-day', 'figure'),
-          events=[Event('graph-update', 'interval')])
+          events=[Event('previous-update', 'interval')])
 def update_graph_scatter():
     start_date = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 0) + timedelta(days=-5)
     end_date = datetime(datetime.now().year, datetime.now().month, datetime.now().day, 0)
