@@ -2,9 +2,7 @@ import dash
 from dash.dependencies import Output, Event
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly
 import plotly.graph_objs as go
-from collections import deque
 import pandas as pd
 import sys
 
@@ -14,7 +12,12 @@ for PATH in PATHS:
     if PATH not in sys.path:
         sys.path.insert(0, PATH)
 
-from dash_predict import pandasdb
+## If running from apache server, import from dash_predict, else import from ./
+if __name__ == "__main__":  
+    import pandasdb  
+else:
+    from dash_predict import pandasdb
+    
 from datetime import datetime, timedelta
 
 def dash_data(start_date, end_date, title, db_obj, **tables):
@@ -25,11 +28,9 @@ def dash_data(start_date, end_date, title, db_obj, **tables):
     delta = end_date - start_date
     delta_hours = delta.days*24 + delta.seconds/3600 +1
     date_range = pd.date_range(start=start_date, end=end_date, periods = delta_hours)
-
-    ## Create empty dataframe for merging
-#    df = pd.DataFrame()
+    
+    ## Pull data from each table and create graph trace for each
     data = []
-    ## Pull data from each table and merge predicted/confirmed demands into single df
     for table in tables:
         table_df = db_obj.pd_from_db(table)
         table_df = table_df.set_index('Date/Time')
@@ -74,12 +75,12 @@ app.layout = html.Div(style={'margin-top': 20}, children=[
                      on a neural network model. The NN is a 12-hour-ahead prediction updated at 10:00
                      and 22:00. IESO predictions are 24-hour updated at 10:00. IESO actuals are updated
                      hourly.''',
-                     style={'textAlign': 'center', 'margin-left': 275, 'margin-right': 275}),
+                     style={'textAlign': 'center', 'margin-left': 150, 'margin-right': 150}),
             dcc.Graph(id='live-graph', animate=True),
             dcc.Graph(id='five-day', animate=True),
             dcc.Interval(
                     id='graph-update',
-                    interval=60*1000)
+                    interval=5*1000)
         ]
 )
 
@@ -99,7 +100,7 @@ def update_graph_scatter():
                      IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'line'},
                      IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
                      MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
-                     MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'purple', 'Dash': 'dot'})
+                     MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
 
 ## Graph 2: Past five days of data
 @app.callback(Output('five-day', 'figure'),
@@ -116,9 +117,10 @@ def update_graph_scatter():
                      IESOACTUAL={'Column': 'IESO Actual Demand', 'Name': 'IESO Actual Demand', 'Line Color': 'blue', 'Dash': 'line'},
                      IESOFORECAST={'Column': 'IESO Predicted Demand', 'Name': 'IESO Predicted Demand', 'Line Color': 'orange', 'Dash': 'dot'},
                      MYFORECAST={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction', 'Line Color': 'green', 'Dash': 'dot'},
-                     MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'purple', 'Dash': 'dot'})
+                     MYFORECAST1={'Column': 'Predicted Demand', 'Name': 'Neural Network Prediction (v2)', 'Line Color': 'red', 'Dash': 'dot'})
 
 server = app.server
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
